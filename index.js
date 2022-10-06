@@ -45,7 +45,7 @@ class Operation2do{
         this.number2 = 0;
         this.result = 0;
         this.operation = "";
-        this.change_display = true;     //bool que se pone en true si hay un numero esperando para ser usado
+        this.change_display = false;     //bool que se pone en true si hay un numero esperando para ser usado
         this.step = 0;
         this.dot_count = 0;
     }
@@ -188,10 +188,11 @@ function initialize_events(){
 function write_display(element2write){
     //console.log(Actual_operation.change_display)
 
-        if (Actual_operation.change_display){
+        if (Actual_operation.change_display == true){
             clear_display();
             Actual_operation.step++;
             Actual_operation.change_display = false;
+            console.log("hola")
         }
         if (display.innerText.length < 13){
             if(Actual_operation.dot_count > 0){
@@ -229,8 +230,8 @@ function clear_display_btn (){
     Actual_operation.operation = "0";
     Actual_operation.change_display = false;
     Actual_operation.step = 0;
-    write_display(Actual_operation.result);
-    Actual_operation.change_display = true;
+    write_display("");
+    //Actual_operation.change_display = true;
     Actual_operation.dot_count = 0;
 }
 
@@ -260,6 +261,7 @@ function one_number_operation(operation_type, operation_callback){
 }
 
 function two_number_operation (operation_type, operation_callback){
+    console.log(Actual_operation.step)
     if (Actual_operation.operation == 0){
         Actual_operation.operation = operation_type
     }
@@ -267,7 +269,8 @@ function two_number_operation (operation_type, operation_callback){
             Actual_operation.change_display = true;
             Actual_operation.operation = operation_type;
             func2use = operation_callback;
-            Actual_operation.number1 = Actual_operation.result;
+            Actual_operation.number1 = parseFloat(display.innerText);
+            //Actual_operation.number1 = Actual_operation.result;
         }
         else if(Actual_operation.step == 1){
             Actual_operation.number1 = parseFloat(Actual_operation.number1);
@@ -275,6 +278,7 @@ function two_number_operation (operation_type, operation_callback){
             if(func2use == 0){
                 func2use = operation_callback;
                 Actual_operation.result = func2use(Actual_operation.number1, Actual_operation.number2);
+                Actual_operation.number2
             }
             else {
                 Actual_operation.result = func2use(Actual_operation.number1, Actual_operation.number2);
@@ -286,10 +290,10 @@ function two_number_operation (operation_type, operation_callback){
                 Actual_operation.result = Actual_operation.result.toExponential()
             }
             write_display(Actual_operation.result);
-            if(Actual_operation.number1){
+           // if(Actual_operation.number1){
                 Calculations.push(new Operations_backup(Actual_operation.number1, Actual_operation.number2,Actual_operation.result, Actual_operation.operation, id++))
                 update_calc_storage();
-            }
+           // }
             Actual_operation.number1 = Actual_operation.result;
             draw_products();
             Actual_operation.change_display = true;
@@ -478,9 +482,10 @@ function main(){
     Actual_operation = new Operation2do();
     initialize_elements();
     initialize_events();
-    clear_display_btn();
+   // clear_display_btn();
     get_calc_storage();
     parse_btns();
+    console.log(Actual_operation.change_display)
 }
 
 main();
