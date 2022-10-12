@@ -493,7 +493,7 @@ function draw_products() {
   }
 
   async function check_server_data() {
-    fetch("./productos.json")
+    fetch("./calculations.json")
       .then((response) => response.json())
       .then((data) => {
         Calculations = [...data]
