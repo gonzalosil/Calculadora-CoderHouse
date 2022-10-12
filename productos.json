@@ -1,0 +1,44 @@
+[
+  {
+    "number1": 10,
+    "number2": 49,
+    "result": 59,
+    "operation": "Suma",
+    "id": 123
+  },
+  {
+    "number1": 20,
+    "number2": 10,
+    "result": 200,
+    "operation": "Multiplicacion",
+    "id": 124
+  },
+  {
+    "number1": 3,
+    "number2": 0,
+    "result": 6,
+    "operation": "Factorial",
+    "id": 125
+  },
+  {
+    "number1": 40,
+    "number2": 4,
+    "result": 10,
+    "operation": "Division",
+    "id": 126
+  },
+  {
+    "number1": 50,
+    "number2": 60,
+    "result": -10,
+    "operation": "Resta",
+    "id": 1237
+  },
+  {
+    "number1": 8,
+    "number2": 0,
+    "result": 0.9893,
+    "operation": "Seno",
+    "id": 130
+  }
+]

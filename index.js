@@ -429,7 +429,7 @@ function draw_products() {
       contenedorProductos.append(column);
   
       let botonEliminar = document.getElementById(`botonEliminar-${calc.id}`);
-      botonEliminar.onclick = () => delete_Calculation(calc.id);
+      botonEliminar.onclick = () => confirm_item_delete(calc.id);
     });
   }
 
@@ -457,6 +457,20 @@ function draw_products() {
     }
   }
 
+  function confirm_item_delete(idProducto) {
+    Swal.fire({
+      icon: "question",
+      title: "¿Estas seguro que quieres eliminar el producto?",
+      showCancelButton: true,
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        delete_Calculation(idProducto);
+      }
+    });
+  }
+
   function delete_storage() {
     Swal.fire({
         title: 'Está seguro de eliminar todos los calculos?',
@@ -478,14 +492,23 @@ function draw_products() {
         })
   }
 
+  async function check_server_data() {
+    fetch("./productos.json")
+      .then((response) => response.json())
+      .then((data) => {
+        Calculations = [...data]
+        draw_products();
+      })
+      .catch((error) => console.log(error));
+  }
+
 function main(){
     Actual_operation = new Operation2do();
     initialize_elements();
     initialize_events();
-   // clear_display_btn();
+    check_server_data();
     get_calc_storage();
     parse_btns();
-    console.log(Actual_operation.change_display)
 }
 
 main();
