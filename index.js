@@ -502,13 +502,59 @@ function draw_products() {
       .catch((error) => console.log(error));
   }
 
+  function draw_calculator(){
+
+    let calc = document.createElement("div");
+    calc.className = "main";
+    //column.id = `calculator-${calc.id}`;
+    calc.innerHTML = `
+        <div class="display">
+                <h2 id="result"></h2> 
+            </div> 
+            <div class="buttons"> 
+                <button id="clear_btn" type="button" class="btn btn-secondary">C</button> 
+                <button id="divide_btn" type="button" class="btn btn-secondary">/</button> 
+                <button id="multiply_btn" type="button" class="btn btn-secondary">x</button>
+                <button id="plus_btn" type="button" class="btn btn-secondary">+</button> 
+                <button id="minus_btn" type="button" class="btn btn-secondary">-</button> 
+            </div> 
+            <div class="buttons"> 
+                <button id="seven_btn" type="button" class="btn btn-secondary">7</button> 
+                <button id="eight_btn" type="button" class="btn btn-secondary">8</button> 
+                <button id="nine_btn" type="button" class="btn btn-secondary">9</button> 
+                <button id="sin_btn" type="button" class="btn btn-secondary">sin</button> 
+
+            </div> 
+            <div class="buttons"> 
+                <button id="four_btn" type="button" class="btn btn-secondary">4</button> 
+                <button id="five_btn" type="button" class="btn btn-secondary">5</button> 
+                <button id="six_btn" type="button" class="btn btn-secondary">6</button> 
+                <button id="cos_btn" type="button" class="btn btn-secondary">cos</button> 
+
+            </div> 
+            <div class="buttons"> 
+                <button id="one_btn" type="button" class="btn btn-secondary">1</button> 
+                <button id="two_btn" type="button" class="btn btn-secondary">2</button> 
+                <button id="three_btn" type="button" class="btn btn-secondary">3</button> 
+                <button id="tan_btn" type="button" class="btn btn-secondary">tan</button>
+
+            </div> 
+            <div class="buttons"> 
+                <button id="cero_btn" type="button" class="btn btn-secondary">0</button> 
+                <button id="dot_btn" type="button" class="btn btn-secondary">.</button> 
+                <button id="factorial_btn" type="button" class="btn btn-secondary">!</button> 
+                <button id="equal_btn" type="button" class="btn btn-secondary">=</button> 
+            </div>  `;
+  }
 function main(){
     Actual_operation = new Operation2do();
+    draw_calculator();
     initialize_elements();
     initialize_events();
     check_server_data();
     get_calc_storage();
     parse_btns();
+    
 }
 
 main();

@@ -9,7 +9,7 @@ body{
     place-items: center;
     background: rgba(10,10,10,0.1);
 }
-.main{
+#calculator{
     position: absolute;
     display: flex;
     align-items: center;
