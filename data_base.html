@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+        <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin="anonymous"
+  />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <!-- LOGO -->
+    <div class="logo">gÓN'Z</div>
+    <!-- NAVIGATION MENU -->
+    <ul class="nav-links">
+      <!-- USING CHECKBOX HACK -->
+      <!-- NAVIGATION MENUS -->
+      <div class="menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="calculator.html">Calculadora</a></li>
+        <li class="graph.html"><a href="/">Graficador</a></li>
+        <li><a href="data_base.html">Resultados</a></li>
+      </div>
+    </ul>
+  </nav>
+    <div class="container p-3">
+        <div class="row">
+          <div class="col-md-6">
+            <div id="clean_storage"></div>
+            <button class="btn btn-warning" >
+                Eliminar Base de datos
+              </button>
+            <div id="contenedorProductos" class="row"></div>
+          </div>
+        </div>
+    </div>
+    <div id="calc"></div>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+      ></script>
+        <script src="data_base.js"></script>
+</body>
+</html>

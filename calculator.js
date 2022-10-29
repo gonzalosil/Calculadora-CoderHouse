@@ -156,6 +156,7 @@ function tan (angle){
 }
 
 //===================================================>FIN DE LAS OPERACIONES<=====================================================================
+
 function initialize_elements() {
     clear_btn = document.getElementById("clear_btn");
     divide_btn = document.getElementById("divide_btn");
@@ -178,42 +179,31 @@ function initialize_elements() {
     eight_btn = document.getElementById("eight_btn");
     nine_btn = document.getElementById("nine_btn");
     equal_btn = document.getElementById("equal_btn");
-    clean_storage_btn = document.getElementById("clean_storage");
-}
-
-function initialize_events(){
-    clean_storage_btn.onclick = delete_storage;
 }
 
 function write_display(element2write){
-    //console.log(Actual_operation.change_display)
-
-        if (Actual_operation.change_display == true){
-            clear_display();
-            Actual_operation.step++;
-            Actual_operation.change_display = false;
-            console.log("hola")
-        }
-        if (display.innerText.length < 13){
-            if(Actual_operation.dot_count > 0){
-                if(Actual_operation.dot_count > 13){
-                    Actual_operation.dot_count = 13;
-                }
-                element2write = parseInt(element2write) / power(10, Actual_operation.dot_count);
-                element2write = (parseFloat(display.innerText) + parseFloat(element2write)).toFixed(Actual_operation.dot_count);
-                display.innerText = element2write.toString();
-                Actual_operation.dot_count++;
-                if(Actual_operation.dot_count > 13){
-                    Actual_operation.dot_count = 13;
-                }
-            }
-            else{
-                display.innerText = display.innerText + element2write.toString();
-            }
-
+    if (Actual_operation.change_display == true){
+        clear_display();
+        Actual_operation.step++;
+        Actual_operation.change_display = false;
     }
-    console.log("step " + Actual_operation.step)
-    //console.log("longitud " + display.innerText.length)
+    if (display.innerText.length < 13){
+        if(Actual_operation.dot_count > 0){
+            if(Actual_operation.dot_count > 13){
+                Actual_operation.dot_count = 13;
+            }
+            element2write = parseInt(element2write) / power(10, Actual_operation.dot_count);
+            element2write = (parseFloat(display.innerText) + parseFloat(element2write)).toFixed(Actual_operation.dot_count);
+            display.innerText = element2write.toString();
+            Actual_operation.dot_count++;
+            if(Actual_operation.dot_count > 13){
+                Actual_operation.dot_count = 13;
+            }
+        }
+        else{
+            display.innerText = display.innerText + element2write.toString();
+        }
+    }
 }
 
 function clear_display (){
@@ -231,7 +221,6 @@ function clear_display_btn (){
     Actual_operation.change_display = false;
     Actual_operation.step = 0;
     write_display("");
-    //Actual_operation.change_display = true;
     Actual_operation.dot_count = 0;
 }
 
@@ -254,14 +243,13 @@ function one_number_operation(operation_type, operation_callback){
     Calculations.push(new Operations_backup(Actual_operation.number1, Actual_operation.number2,Actual_operation.result, Actual_operation.operation, id++))
     update_calc_storage();
     Actual_operation.number1 = Actual_operation.result;
-    draw_products();
+    //draw_products();
     Actual_operation.step = 0;
     Actual_operation.change_display = true;
     Actual_operation.operation = 0;
 }
 
 function two_number_operation (operation_type, operation_callback){
-    console.log(Actual_operation.step)
     if (Actual_operation.operation == 0){
         Actual_operation.operation = operation_type
     }
@@ -295,7 +283,7 @@ function two_number_operation (operation_type, operation_callback){
                 update_calc_storage();
            // }
             Actual_operation.number1 = Actual_operation.result;
-            draw_products();
+           //draw_products();
             Actual_operation.change_display = true;
             Actual_operation.operation = operation_type;
             Actual_operation.number1 = Actual_operation.result;
@@ -313,7 +301,7 @@ function two_number_operation (operation_type, operation_callback){
             Calculations.push(new Operations_backup(Actual_operation.number1, Actual_operation.number2,Actual_operation.result, Actual_operation.operation, id++))
             update_calc_storage();
             Actual_operation.number1 = Actual_operation.result;
-            draw_products();
+            //draw_products();
             Actual_operation.change_display = true;
             Actual_operation.operation = operation_type;
             Actual_operation.number1 = Actual_operation.result;
@@ -397,51 +385,16 @@ function parse_btns (){
     equal_btn.onclick = () => {
         equal(Actual_operation.operation);
     }
+
 }
 
-function draw_products() {
-    contenedorProductos.innerHTML = "";
-    Calculations.forEach((calc) => {
-      let column = document.createElement("div");
-        column.className = "col-md-4 mt-3";
-        column.id = `columna-${calc.id}`;
-        column.innerHTML = `
-              <div class="card">
-                  <div class="card-body">
-                  <p class="card-text">Numero 1:
-                      <b>${calc.number1}</b>
-                  </p>
-                  <p class="card-text">Numero 2:
-                      <b>${calc.number2}</b>
-                  </p>
-                  <p class="card-text">Resultado:
-                      <b>${calc.result}</b>
-                  </p>
-                  <p class="card-text">Operacion:
-                      <b>${calc.operation}</b>
-                  </p>
-                  </div>
-                  <div class="card-footer">
-                      <button class="btn btn-danger" id="botonEliminar-${calc.id}" >Eliminar</button>
-                  </div>
-              </div>`;
-  
-      contenedorProductos.append(column);
-  
-      let botonEliminar = document.getElementById(`botonEliminar-${calc.id}`);
-      botonEliminar.onclick = () => confirm_item_delete(calc.id);
-    });
-  }
-
-  function delete_Calculation(id_Calc) {
-    let columnaBorrar = document.getElementById(`columna-${id_Calc}`);
-    let indiceBorrar = Calculations.findIndex(
-      (id_Calc) => Number(Calculations.id) === Number(id_Calc)
-    );
-  
-    Calculations.splice(indiceBorrar, 1);
-    columnaBorrar.remove();
-    update_calc_storage();
+function get_calc_storage() {
+    let CalculationsJSON = localStorage.getItem("Calculations");
+    if (CalculationsJSON){
+        Calculations = (JSON.parse(CalculationsJSON));
+        id = Calculations[Calculations.length - 1].id+1;
+    }
+    
   }
 
   function update_calc_storage() {
@@ -449,113 +402,14 @@ function draw_products() {
     localStorage.setItem("Calculations", CalculationsJSON);
   }
 
-  function get_calc_storage() {
-    let CalculationsJSON = localStorage.getItem("Calculations");
-    if (CalculationsJSON) {
-      Calculations = JSON.parse(CalculationsJSON);
-      draw_products();
-    }
-  }
 
-  function confirm_item_delete(idProducto) {
-    Swal.fire({
-      icon: "question",
-      title: "¿Estas seguro que quieres eliminar el producto?",
-      showCancelButton: true,
-      confirmButtonText: "Eliminar",
-      cancelButtonText: "Cancelar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        delete_Calculation(idProducto);
-      }
-    });
-  }
-
-  function delete_storage() {
-    Swal.fire({
-        title: 'Está seguro de eliminar todos los calculos?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Sí, seguro',
-        cancelButtonText: 'No, no quiero'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                localStorage.clear();
-                Calculations = [];
-                draw_products();
-                Swal.fire({
-                    title: 'Borrado!',
-                    icon: 'success',
-                    text: 'Los calculos han sido eliminados'
-                })
-            }
-        })
-  }
-
-  async function check_server_data() {
-    fetch("./calculations.json")
-      .then((response) => response.json())
-      .then((data) => {
-        Calculations = [...data]
-        draw_products();
-      })
-      .catch((error) => console.log(error));
-  }
-
-  function draw_calculator(){
-
-    let calc = document.createElement("div");
-    calc.className = "main";
-    //column.id = `calculator-${calc.id}`;
-    calc.innerHTML = `
-        <div class="display">
-                <h2 id="result"></h2> 
-            </div> 
-            <div class="buttons"> 
-                <button id="clear_btn" type="button" class="btn btn-secondary">C</button> 
-                <button id="divide_btn" type="button" class="btn btn-secondary">/</button> 
-                <button id="multiply_btn" type="button" class="btn btn-secondary">x</button>
-                <button id="plus_btn" type="button" class="btn btn-secondary">+</button> 
-                <button id="minus_btn" type="button" class="btn btn-secondary">-</button> 
-            </div> 
-            <div class="buttons"> 
-                <button id="seven_btn" type="button" class="btn btn-secondary">7</button> 
-                <button id="eight_btn" type="button" class="btn btn-secondary">8</button> 
-                <button id="nine_btn" type="button" class="btn btn-secondary">9</button> 
-                <button id="sin_btn" type="button" class="btn btn-secondary">sin</button> 
-
-            </div> 
-            <div class="buttons"> 
-                <button id="four_btn" type="button" class="btn btn-secondary">4</button> 
-                <button id="five_btn" type="button" class="btn btn-secondary">5</button> 
-                <button id="six_btn" type="button" class="btn btn-secondary">6</button> 
-                <button id="cos_btn" type="button" class="btn btn-secondary">cos</button> 
-
-            </div> 
-            <div class="buttons"> 
-                <button id="one_btn" type="button" class="btn btn-secondary">1</button> 
-                <button id="two_btn" type="button" class="btn btn-secondary">2</button> 
-                <button id="three_btn" type="button" class="btn btn-secondary">3</button> 
-                <button id="tan_btn" type="button" class="btn btn-secondary">tan</button>
-
-            </div> 
-            <div class="buttons"> 
-                <button id="cero_btn" type="button" class="btn btn-secondary">0</button> 
-                <button id="dot_btn" type="button" class="btn btn-secondary">.</button> 
-                <button id="factorial_btn" type="button" class="btn btn-secondary">!</button> 
-                <button id="equal_btn" type="button" class="btn btn-secondary">=</button> 
-            </div>  `;
-  }
 function main(){
     Actual_operation = new Operation2do();
-    draw_calculator();
     initialize_elements();
-    initialize_events();
-    check_server_data();
+    // initialize_events();
+    //check_server_data();
     get_calc_storage();
     parse_btns();
-    
 }
-
 main();
 
