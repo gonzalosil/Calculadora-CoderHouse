@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="plotter_style.css" />
+    
 </head>
 <body>
   <nav class="navbar">
@@ -19,7 +21,30 @@
       </div>
     </ul>
   </nav>
-
+  <div id="contenedorIdentificacion">
+    <form id="add_function">
+      <div class="row">
+        <div class="col-md-8">
+          <div>
+            <label class="form-label">Función</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputUsuario"
+              required
+            />
+          </div>
+        </div>
+        <div>
+          <button class="submit_btn" type="submit">
+            <p>Cargar</p>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div id="myPlot"></div>
+  <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
         <script src="plotter.js"></script>
 </body>
 </html>

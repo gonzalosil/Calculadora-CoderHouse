@@ -86,11 +86,15 @@ function get_calc_storage() {
   }
 
   async function check_server_data() {
+    let temp_array = [];
     fetch("./calculations.json")
       .then((response) => response.json())
       .then((data) => {
-        Calculations = [...data]
+        temp_array = [...data];
+        Calculations = Calculations.concat(temp_array);
         draw_products();
+        console.log(temp_array)
+        console.log(Calculations)
       })
       .catch((error) => console.log(error));
   }
@@ -116,6 +120,7 @@ function get_calc_storage() {
     initialize_events();
     // check_server_data();
     get_calc_storage();
+    check_server_data();
     //update_calc_storage();
   }
 

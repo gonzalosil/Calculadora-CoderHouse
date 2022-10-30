@@ -1,0 +1,25 @@
+#contenedorIdentificacion{
+    position: absolute;
+    top: 10%;
+    left: 1%;
+}
+
+.submit_btn{
+    position: absolute;
+    top: 125%;
+    left: 25%;
+    width: 60%;
+    height: 200%;
+    background-color:  rgba(48,49,55,0.7);
+    border-radius: 5px;
+}
+
+.submit_btn p{
+    color: #ddd;
+    font-size: large;
+}
+
+.form-label{
+    color: #ddd;
+    font-size: larger;
+}
