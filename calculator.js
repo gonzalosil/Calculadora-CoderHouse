@@ -392,7 +392,8 @@ function get_calc_storage() {
     let CalculationsJSON = localStorage.getItem("Calculations");
     if (CalculationsJSON){
         Calculations = (JSON.parse(CalculationsJSON));
-        id = Calculations[Calculations.length - 1].id+1;
+        if(Calculations.length > 0)
+            id = Calculations[Calculations.length - 1].id+1;
     }
     
   }

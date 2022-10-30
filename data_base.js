@@ -1,10 +1,11 @@
 
 let Calculations = [];
+
 function draw_products() {
     contenedorProductos.innerHTML = "";
     Calculations.forEach((calc) => {
       let column = document.createElement("div");
-        column.className = "col-md-4 mt-3";
+        column.className = "col-lg-4";
         column.id = `columna-${calc.id}`;
         column.innerHTML = `
               <div class="card">
@@ -38,7 +39,7 @@ function initialize_elements(){
     clean_storage_btn = document.getElementById("clean_storage");
 }
 function initialize_events(){
-    clean_storage_btn.onclick = delete_storage;
+    clean_storage_btn.onclick = () => delete_storage();
 }
 
 function get_calc_storage() {
@@ -107,7 +108,7 @@ function get_calc_storage() {
   }
   function update_calc_storage() {
     let CalculationsJSON = JSON.stringify(Calculations);
-    localStorage.setItem("Calculations_data_base", CalculationsJSON);
+    localStorage.setItem("Calculations", CalculationsJSON);
   }
 
   function main(){
