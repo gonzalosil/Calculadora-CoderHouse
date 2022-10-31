@@ -4,6 +4,10 @@
     left: 1%;
 }
 
+/* #myPlot{
+    position: absolute;
+} */
+
 .submit_btn{
     position: absolute;
     top: 125%;
@@ -22,4 +26,36 @@
 .form-label{
     color: #ddd;
     font-size: larger;
+}
+
+.lista_funciones{
+    position: absolute;
+    left: 4%;
+    top: 25%;
+}
+
+.card-text{
+    margin-top: 10%;
+    max-width: 90%;
+}
+
+.card-text{
+    
+    color: #ddd;
+    font-size: larger;
+    
+}
+
+.delete_btn{
+    position: relative;
+    left: 2%;
+    height: 140%;
+    width: 65%;
+    background-color:  rgba(55, 48, 48, 0.915);
+    border-radius: 5px;
+    max-width: 65%;
+}
+
+.delete_btn p{
+    color: #ddd;
 }
